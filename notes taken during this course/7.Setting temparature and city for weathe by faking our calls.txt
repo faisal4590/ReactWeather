@@ -1,0 +1,139 @@
+1. now image ta dekhle dekhte parbo je  kalo border wala weathe component
+ta hocce parent component.. etar state change hobe. er moddhe
+weatherForm and Weather message hocce nested component and ei 2ta presentational
+component...
+
+2. now WeatherForm theke data nie black border e send korbe.. then black border theke data
+WeatherMessage Component e send kora hbe..
+
+3. code for weatherForm.jsx :
+
+var React = require('react');
+
+var WeatherForm = React.createClass ( {
+    onFormSubmit : function ( e ) {
+        e.preventDefault();
+
+        var location = this.refs.location.value;
+        if(location.length> 0 )
+        {
+            this.refs.location.value = '';
+            this.props.onSearch(location);
+        }
+    },
+    render: function () {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" ref="location"/>
+                    <br/><br/>
+                    <button>Get Weather</button>
+                </form>
+
+            </div>
+        );
+    }
+} );
+
+module.exports = WeatherForm;
+
+explanation :
+1st e input type text e 1ta reference die dilam.. now okhane je value input dewa hobe
+otake catch korbo..
+
+now form submit kora hole onFormSubmit func ta execute hbe..
+location variable er moddhe text field er value take nie rakhlam
+var location = this.refs.location.value; ei line ta die..
+then check korlam user jeno empty na rekhe form submit na dey..
+tai length die condition ta check korci...
+
+submit kora hole then abar text feild ta empty kore dibo.. tai
+' ' die rakhci...
+
+then this.props.onSearch(location); krci.. etar mane holo
+form submit korle location to 1ta dibe user.. now setake retrieve kore kalo border e pathate hobe..
+so eta pathaici Weather.jsx file e...
+
+4. code for weather.jsx :
+var React = require ( 'react' );
+var WeatherForm = require ( 'WeatherForm' );
+var WeatherMessage = require ( 'WeatherMessage' );
+
+var Weather = React.createClass ( {
+    getInitialState: function (  ) {
+       return{
+           location: 'Dhaka city',
+           temp : 34
+       }
+    },
+
+    handleSearch : function ( location ) {
+        this.setState({
+            location : location,
+            temp : 23
+        });
+    },
+    render: function () {
+        var {temp, location} = this.state;
+        return (
+            <div>
+                <h3>Weather Component</h3>
+                <WeatherForm  onSearch ={this.handleSearch}/>
+                <WeatherMessage temp = {temp} location={location}/>
+                {/*.......This comment is for WeatherForm and WeatherMessage component........
+                 image ta dekhle dekhte pabo je Weather ta hocce kalo border wala wrapper..
+                 er moddhe 1ta input field thakbe and getWeather e click korle niche 1ta message dekhabe
+                 je weather koto.. sejonno ei component e nested korlam ei 2take....*/}
+            </div>
+
+        );
+    }
+} );
+
+module.exports = Weather;
+
+line 81 te dekhte parbo je  <WeatherForm  onSearch ={this.handleSearch}/>
+lekha.. tar mane ekhane pathaicilam location take.. mane kalo border e pathalam..
+now location take set korci hadleSearch function e...
+
+handleSearch : function ( location ) {
+        this.setState({
+            location : location,
+            temp : 23
+        });
+    },
+
+ekhane state ta set kore dilam.. temp apatoto 1ta random value die rakhlam..
+pore fetch kore anbo api theke..
+
+now amake black border theke temp ar location er data WeatherMessage component e pathate
+hbe jate okhane view hoy...
+
+var {temp, location} = this.state;
+tai evabe jsx expression die likhlam..
+
+<WeatherMessage temp = {temp} location={location}/>
+then ei component er moddhe value 2take pass kore dilam..
+
+5. code for WeatherMessaage.jsx :
+var React = require('react');
+
+var WeatherMessage = React.createClass ( {
+    render: function () {
+        var {temp,location} = this.props;
+        return (
+            <div>
+                <h3>It is {temp} in {location}</h3>
+            </div>
+        );
+    }
+} );
+module.exports = WeatherMessage;
+
+je value 2ta ke pass korcilam ogula ke cathc kora lagbe..
+var {temp,location} = this.props;
+tai ei line likhlam.. value 2take props akare pathaicilm..
+tai this.props likhlam....
+
+and last e <h3>It is {temp} in {location}</h3>
+evabe value 2take bind kore dilam...

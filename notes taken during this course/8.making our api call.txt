@@ -1,0 +1,126 @@
+ei part e api ta use kore temperature show koraici...
+code er moddhe sob comment kora ace..
+
+1.code for openWeatherMap.jsx :
+var axios = require ( 'axios' );
+/*..... This comment is for what is axios and why and how we use it .....
+ axios plugin ta die weather information fetch kore anbo..
+ tai age terminal e npm install axios --save command ta
+ chalay nici.. Now axios er feature gulake axios
+ var e nie nilam.. now use korte parbo..
+ */
+
+//ab59d47d829b573e13775451679f3f7f
+//this is the API key from openweathermap.org..
+//sign up korle then api key nite parbo....
+
+
+const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=ab59d47d829b573e13775451679f3f7f&units=metric';
+//this is the naming convention of using const in es6
+//units=metric add korlam karon by default temp ashe kelvin e.. now eta add koray celsius e ashbe..
+//units = imperial use korle temp farenhite e asto....
+
+
+module.exports = {
+    getTemp: function ( location ) {
+        var encodedLocation = encodeURIComponent ( location );
+        var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
+        /* .........This comment is for encodedLocation and requestUrl variables.........
+         eta es6 er new feature.. etake bole template string.. eta die 1ta variable er moddhe arekta variable string
+         akare use korte parteci...bar bar string concat kore use kora jhamela.. `` ei symbol ta ace 1 er bam e..
+         encodeURIComponent() use korlam karon browser e jokhn amra space likhi tokhn seta automatic
+         %20% te convert kore ney. seta jate amr url e na kore sejonno eta use korlam...caz user location er name
+         Dhaka city likhte pare... majhe 1ta space ace.. but browser setake %20% te convert kore nito...
+         */
+
+        return axios.get ( requestUrl ).then ( function ( response ) {
+            /*axios.get() use kore url ke catch korlam.. now promise
+             er mto ekhaneo 2ta case hote pare.. success and error..
+             2takei response varibale e nibo...
+             eta 1ta promise. so promise mane success/failure return korbe..
+             sejonno return dilam...
+             */
+
+            if (response.data.cod && response.data.message) {
+                throw new Error(response.data.message);
+
+            }
+            else
+            {
+                return response.data.main.temp;
+            }
+
+
+        }, function ( response ) {
+            throw new Error ( response.data.message );
+            // jodi error ase tahole ki type er error seta throw korlam...
+
+        } );
+    }
+}
+
+2. code for weather.jsx :
+var React = require ( 'react' );
+var WeatherForm = require ( 'WeatherForm' );
+var WeatherMessage = require ( 'WeatherMessage' );
+var openWeatherMap = require ( '../api/openWeatherMap' );
+
+
+var Weather = React.createClass ( {
+    getInitialState: function () {
+        return {
+            location: 'Dhaka city',
+            temp: 34
+        }
+    },
+
+    handleSearch: function ( location ) {
+        /*this.setState({
+         location : location,
+         temp : 23
+         });*/
+        var that = this;
+        openWeatherMap.getTemp ( location ).then ( function ( temp ) {
+            that.setState ( {
+                //kono function er moddhe this use korte partam na..
+                //tai 1ta variable e nie then use korlam...
+                location: location,
+                temp: temp
+            } )
+        }, function ( errorMessage ) {
+            alert ( errorMessage );
+        } );
+
+    },
+    render: function () {
+        var {temp, location} = this.state;
+        return (
+            <div>
+                <h3>Weather Component</h3>
+                <WeatherForm onSearch={this.handleSearch}/>
+                <WeatherMessage temp={temp} location={location}/>
+                {/*.......This comment is for WeatherForm and WeatherMessage component........
+                 image ta dekhle dekhte pabo je Weather ta hocce kalo border wala wrapper..
+                 er moddhe 1ta input field thakbe and getWeather e click korle niche 1ta message dekhabe
+                 je weather koto.. sejonno ei component e nested korlam ei 2take....*/}
+            </div>
+
+        );
+    }
+} );
+
+module.exports = Weather;
+
+3. aliases for webpack.config.org :
+alias: {
+            Main: 'app/components/Main.jsx',
+            Nav: 'app/components/Nav.jsx',
+            Weather: 'app/components/Weather.jsx',
+            WeatherForm : 'app/components/WeatherForm.jsx',
+            WeatherMessage : 'app/components/WeatherMessage.jsx',
+            About: 'app/components/About.jsx',
+            Examples: 'app/components/Examples.jsx',
+            openWeatherMap : 'app/api/components/openWeatherMap.jsx'
+
+
+},

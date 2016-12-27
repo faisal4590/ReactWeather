@@ -1,0 +1,199 @@
+1. suppose about page er jonno je link ta krcilam
+<Link path="\about"> About us </Link>
+eta na kore <a href="#/about">Go to About </a>
+etao to korte partam.. same kaji hoto...
+but Link use korar onekgula extra subidha ace..
+eta use korle custom style and class apply kora jay
+current page e..
+mane holo ami about page e thakle about link ke style korte
+parbo jate user bujhte pare je se about page e ace..
+eta sobcheye boro subidha...
+
+protita code er comment dekhbo valo kore...
+ei part e just Nav.jsx er code take modify krci..
+
+1. code for About.jsx :
+var React = require ('react');
+
+var About = React.createClass ( {
+    render: function () {
+        return (
+            <h3>About Component</h3>
+        );
+    }
+} );
+
+module.exports = About;
+
+2.code for example.jsx :
+var React = require ( 'react' );
+
+var Examples = React.createClass ( {
+    render: function () {
+        return (
+            <div>
+                <h2>Examples Component</h2>
+            </div>
+        );
+    }
+} );
+
+module.exports = Examples;
+
+3.code for Main.jsx :
+var React = require('react');
+var Nav = require('Nav');
+
+var Main = React.createClass ( {
+    render: function () {
+        return(
+            <div>
+                <Nav/>
+                <h2>Main Component </h2>
+                {this.props.children}
+                {/*image er structure onujayi amr sobar upore thakbe navbar
+                then thakbe tar niche thakbe component jegula hocce container component
+                er children.. tai evabe likhlam..*/}
+            </div>
+
+        );
+    }
+} );
+
+module.exports = Main;
+
+
+// component er name ar page er name same rakhbo always
+
+4.code for Nav.jsx :
+var React = require ( 'react' );
+
+var {Link, IndexLink} = require ( 'react-router' );
+//nav er element gulake linkup korabo.. tai ei
+//library ta nilam
+
+var Nav = React.createClass ( {
+    render: function () {
+        return (
+            <div>
+                <h2>Nav Component</h2>
+                <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Get Weather </IndexLink>
+                {/*   ........this comment is for why we use IndexLink........
+                 App.jsx file e gele dekhbo Main component er under e
+                 baki route gulake nested kora.. sejonno IndexRoute ta always i active thake
+                 onno kono route e visit korleo/... eta alada korar jonno root component orthat
+                 jetake sob page ei rakhte chai sei route ke IndexLink kore dibo just..
+                 ekhn ar nav e getWeather always bold hoye thakbena..
+                 */}
+
+
+                <Link to="/About" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>About </Link>
+                {/*'/' e gele home page e jabo.. '/about'
+                 e gele About page e jabo...*/}
+                <Link to="/Examples" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Examples </Link>
+                {/*.......This comment is for activeClassName="active" .............
+                 protitay activeClassName="active" use korlam karon
+                 ami suppose Example page e aci.. oi page e just Example link tai
+                 active thakbe nav e.. tai sobguatei eta add korci...*/}
+
+                {/*........ This comment is for activeStyle={{fontWeight:'bold'}}...........
+                 activeStyle={{fontWeight:'bold'}} hocce jsx expression for applying inline styling*/}
+            </div>
+
+        );
+    }
+} );
+
+module.exports = Nav;
+
+5. code for Weathe.jsx :
+var React = require ('react');
+
+var Weather = React.createClass ( {
+    render: function () {
+        return (
+            <h3>Weather Component</h3>
+        );
+    }
+} );
+
+module.exports = Weather;
+
+6.code for app.jsx :
+var React = require ( 'react' );
+var ReactDOM = require ( 'react-dom' );
+var {Route, Router, IndexRoute, hashHistory} = require ( 'react-router' );
+
+//Main.jsx component ke nicci
+var Main = require ( 'Main' );
+
+//weather component ke nici
+var Weather = require ( 'Weather' );
+
+//about component ke nicci
+var About = require ( 'About' );
+
+//examples component ke nici
+var Examples = require('Examples');
+
+ReactDOM.render (
+    <Router history={hashHistory}>
+        {/* ........This comment is for hasHistory.........
+        hasHistory use korar karon holo ami chai je
+        route theke onno kono route e gele page refresh korleo
+        jate state ta mone rakhe je last kothay cilam..
+        url e / er por kisu garbage lekha ashe.. oitai ei hasHistory*/}
+        <Route path="/" component={Main}>
+
+            {/*  ..........This comment is for component={Main} this line...........
+             eta hocce amar Route.. user 1page theke arek page e
+             je jabe seta Route die jay.. "/" mane eta hocce amr root of the application..
+             project er picture e dekhci app er root e je component ota red box dewa
+             mane holo ota whole container component.. ei component tai seta..*/}
+            <Route path="about" component={About}/>
+            {/* ..........This comment is for component={About} this line.........
+             Route jodi '/' hoy tahole tahole component={weather} mane
+             weather component ke render korbo.. jodi '/about' hoy tahole
+             about component ke render korbo.. so nested routing korlam ekhane..
+             */}
+             <Route path="examples" component={Examples}/>
+
+            <IndexRoute component={Weather}/>
+            {/* ..........This comment is for component={Weather} this line.........
+             indexRoute hocce amar app er index page..*/}
+
+
+
+        </Route>
+    </Router>,
+    document.getElementById ( 'app' )
+);
+
+7. code for index.html :
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8"/>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="bundle.js"></script>
+</body>
+
+</html>
+
+8. aliases for webpack.config.js :
+as ei part e kono new component add korinai
+tai aliases o add korinai kisu..
+alias: {
+            Main: 'app/components/Main.jsx',
+            Nav: 'app/components/Nav.jsx',
+            Weather: 'app/components/Weather.jsx',
+            About: 'app/components/About.jsx',
+            Examples: 'app/components/Examples.jsx'
+        },
+
+

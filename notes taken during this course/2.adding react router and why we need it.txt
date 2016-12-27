@@ -1,0 +1,120 @@
+1. react router use kora lagbe amr app er router er kaj korar jonno..
+mane kokhn kon page e jacci seta track korar jonno...
+2. basically 4ta jinish er dorkar hoy..
+    Route, Router, IndexRoute, hasHistory...
+
+3. IndexRoute mane initially page er kon jaygay thakbe eta,,
+ar hasHistory mane page refresh korar poro jeno same route e thake seta...
+
+code for this :
+app.jsx file e.....
+
+var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+
+eta hocce es6 syntax..
+var Route = require('react-router').Route;
+var Router = require('react-router').Router;
+var IndexRoute = require('react-router').IndexRoute;
+var hashHistory = require('react-router').hashHistory;
+
+normal js e evabe likhtam but ekhn ekbare 1line e evabe likhte pari..
+etake bole structural syntax..
+
+erokom arekta example :
+
+for normal js :
+var obj = {
+name :  'Faisal',
+roll : 201514022
+};
+
+for es6 :
+var {name, roll} = obj;
+this will set whatever name and roll property obj object has in it...
+
+
+3. 1ta main component ar 1ta nav component create korbo ei part e ..
+
+code for Main.jsx (component)
+
+var React = require('react');
+var Nav = require('Nav');
+
+var Main = React.createClass ( {
+    render: function () {
+        return(
+            <div>
+                <Nav/>
+                <h2>Main Component </h2>
+            </div>
+
+        );
+    }
+} );
+
+module.exports = Main;
+
+
+// component er name ar page er name same rakhbo always
+
+
+code for Nav.jsx :
+var React = require('react');
+
+var Nav = React.createClass ( {
+    render: function () {
+        return (
+            <h2>Nav Component</h2>
+        );
+    }
+} );
+
+module.exports = Nav;
+
+code for app.jsx :
+
+var React = require ( 'react' );
+var ReactDOM = require ( 'react-dom' );
+var {Route, Router, IndexRoute, hashHistory} = require ( 'react-router' );
+
+//Main.jsx component ke nicci
+var Main = require ( 'Main' );
+
+ReactDOM.render (
+    <Router history={hashHistory}>
+        <Route path="/" component={Main}>
+
+            {/* eta hocce amar Route.. user 1page theke arek page e
+             je jabe seta Route die jay.. "/" mane eta hocce amr root of the application..
+             project er picture e dekhci app er root e je component ota red box dewa
+             mane holo ota whole container component.. ei component tai seta..*/}
+
+
+
+        </Route>
+    </Router>,
+    document.getElementById ( 'app' )
+);
+
+
+4. very imp part :
+jokhno kono component create korbo segulake webpack.config.js file
+e alias e likhe dite hobe..
+
+webpack.config.js file :
+alias: {
+      Main: 'app/components/Main.jsx',
+      Nav: 'app/components/Nav.jsx'
+    },
+
+ei part e 2ta component krci just tai 2ta aliases add korlm..
+
+5. Then terminal webpack likhe enter dibo.. then node server.js likhe enter die
+server on kore browser e localhost:5000 likhle root je router create
+korlam ota dekhte parbo..
+
+6.. jotobar component add korbo totobar webpack lekha jhamela.. tai
+webpack -w likhe die rekhe new window khule kaj korbo onno kisu..
+-w mane watcher..  but webpack.config.js file ekbar update korlei
+webpack -w command abar renew vabe run korte hbe...
+

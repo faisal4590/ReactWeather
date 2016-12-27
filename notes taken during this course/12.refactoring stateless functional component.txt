@@ -1,0 +1,369 @@
+ei part e just normal component er code ke aro choto kore likhci.. comment valo kore dekhbo..
+
+1.code for About.jsx :
+var React = require ( 'react' );
+
+/*var About = React.createClass ( {
+ render: function () {
+ return (
+ <h3>About Component</h3>
+ );
+ }
+ } );*/
+
+var About = ( props ) => {
+    return (
+        <h3>About Component</h3>
+    );
+};
+/* ........This is comment  for above uncommented part
+ * jodi amr component emon hoy jetar moddhe just render
+ * function ace and jetay  kono state nai , just presentational component hisabe kaj
+ * kortece erokom jaygay arrow function use korte parbo...
+ * */
+
+
+module.exports = About;
+
+2.code for Examples.jsx :
+
+var React = require ( 'react' );
+
+/*var Examples = React.createClass ( {
+ render: function () {
+ return (
+ <div>
+ <h2>Examples Component</h2>
+ </div>
+ );
+ }
+ } );*/
+
+var Examples = ( props ) => {
+    return (
+        <div>
+            <h2>Examples Component</h2>
+        </div>
+    )
+};
+/* ........This is comment  for above uncommented part
+ * jodi amr component emon hoy jetar moddhe just render
+ * function ace and jetay  kono state nai , just presentational component hisabe kaj
+ * kortece erokom jaygay arrow function use korte parbo...
+ * */
+
+module.exports = Examples;
+
+3.code for Main.jsx :
+var React = require ( 'react' );
+var Nav = require ( 'Nav' );
+
+/*var Main = React.createClass ( {
+ render: function () {
+ return(
+ <div>
+ <Nav/>
+ <h2>Main Component </h2>
+ {this.props.children}
+ {/!*image er structure onujayi amr sobar upore thakbe navbar
+ then thakbe tar niche thakbe component jegula hocce container component
+ er children.. tai evabe likhlam..*!/}
+ </div>
+
+ );
+ }
+ } );*/
+
+var Main = ( props ) => {
+    return (
+        <div>
+            <Nav/>
+            <h2>Main Component </h2>
+            {props.children}
+            {/* image er structure onujayi amr sobar upore thakbe navbar
+             then thakbe tar niche thakbe component jegula hocce container component
+             er children.. tai evabe likhlam..*/}
+        </div>
+
+    );
+};
+
+module.exports = Main;
+
+
+// component er name ar page er name same rakhbo always
+
+4. code for Nav.jsx :
+var React = require ( 'react' );
+
+var {Link, IndexLink} = require ( 'react-router' );
+//nav er element gulake linkup korabo.. tai ei
+//library ta nilam
+
+/*var Nav = React.createClass ( {
+    render: function () {
+        return (
+            <div>
+                <h2>Nav Component</h2>
+                <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Get Weather </IndexLink>
+                {/!*   ........this comment is for why we use IndexLink........
+                 App.jsx file e gele dekhbo Main component er under e
+                 baki route gulake nested kora.. sejonno IndexRoute ta always i active thake
+                 onno kono route e visit korleo/... eta alada korar jonno root component orthat
+                 jetake sob page ei rakhte chai sei route ke IndexLink kore dibo just..
+                 ekhn ar nav e getWeather always bold hoye thakbena..
+                 *!/}
+
+
+                <Link to="/About" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>About </Link>
+                {/!*'/' e gele home page e jabo.. '/about'
+                 e gele About page e jabo...*!/}
+                <Link to="/Examples" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Examples </Link>
+                {/!*.......This comment is for activeClassName="active" .............
+                 protitay activeClassName="active" use korlam karon
+                 ami suppose Example page e aci.. oi page e just Example link tai
+                 active thakbe nav e.. tai sobguatei eta add korci...*!/}
+
+                {/!*........ This comment is for activeStyle={{fontWeight:'bold'}}...........
+                 activeStyle={{fontWeight:'bold'}} hocce jsx expression for applying inline styling*!/}
+            </div>
+
+        );
+    }
+} );*/
+
+var Nav = () =>{
+    return (
+        <div>
+            <h2>Nav Component</h2>
+            <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Get Weather </IndexLink>
+             {/* ........this comment is for why we use IndexLink........
+                App.jsx file e gele dekhbo Main component er under e
+                baki route gulake nested kora.. sejonno IndexRoute ta always i active thake
+                onno kono route e visit korleo/... eta alada korar jonno root component orthat
+                jetake sob page ei rakhte chai sei route ke IndexLink kore dibo just..
+                ekhn ar nav e getWeather always bold hoye thakbena..*/}
+
+
+
+            <Link to="/About" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>About </Link>
+            {/*'/' e gele home page e jabo.. '/about'
+                e gele About page e jabo...*/}
+            <Link to="/Examples" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Examples </Link>
+            {/*.......This comment is for activeClassName="active" .............
+                protitay activeClassName="active" use korlam karon
+                ami suppose Example page e aci.. oi page e just Example link tai
+                active thakbe nav e.. tai sobguatei eta add korci...*/}
+
+            {/* ........ This comment is for activeStyle={{fontWeight:'bold'}}...........
+             activeStyle={{fontWeight:'bold'}} hocce jsx expression for applying inline styling*/}
+        </div>
+
+    );
+};
+
+module.exports = Nav;
+
+5.code for Weather.jsx :
+var React = require ( 'react' );
+var WeatherForm = require ( 'WeatherForm' );
+var WeatherMessage = require ( 'WeatherMessage' );
+var openWeatherMap = require ( '../api/openWeatherMap' );
+
+
+var Weather = React.createClass ( {
+    getInitialState: function () {
+        return {
+            /*location: 'Dhaka city',
+             temp: 34*/
+
+
+            /* ........This comment is for why we will use isLoading property : .........
+
+             now initial state e 1ta loading property dibo..
+             then search korle loading disable kore dbo.. search ses
+             hole abar loading enable kore dibo..
+
+             */
+
+            isLoading: false //initially loading thakbena kono
+
+
+        }
+    },
+
+    handleSearch: function ( location ) {
+        /*this.setState({
+         location : location,
+         temp : 23
+         });*/
+        var that = this;
+
+        //debugger;
+        /*........This is comment for debugger.......
+         eta react er 1ta default feature.. eta likhe
+         and jodi react developer tools open thake tahole
+         code execute howar somoy automatic ei jaygay code
+         asle code pause hye thakbe.. then amra ei jaygar state , component,
+         props er value sob check korte parbo...
+
+         * */
+
+
+        this.setState ( {isLoading: true} );
+        //jokhn search korbe tokhn loading hobe...tai ekhane
+        //true kore dilam...
+
+        openWeatherMap.getTemp ( location ).then ( function ( temp ) {
+            that.setState ( {
+               /* //kono function er moddhe this use korte partam na..
+                //tai 1ta variable e nie then use korlam...*/
+                location: location,
+                temp: temp,
+                isLoading: false
+                /*.........This comment is for why we use isLoading :false here .........
+                 ekhane isLoading add korlam karon kono city er name die
+                 enter dewar por dekhlam je always is fetching data lekha ta uthe thake..
+                 tar karon holo render e ami isLoading true kore dicilm.. but data fetch kore
+                 die dewar por isLoading false hocce na kokhno... tai ekhane jehetu data return kore
+                 dicce tai ekhane isLoding false die dilam...
+                 */
+
+            } )
+        }, function ( errorMessage ) {
+
+            that.setState ( {isLoading: false} );
+            /*..........This comment is for why we use isLoading : false here ..............
+             ekhaneo isLoading false dilam karon similary kono error paile setake
+             alert box e display korar poro fetching data uthei thake caz isLoading false hocce na
+             */
+
+
+            alert ( errorMessage );
+        } );
+
+    },
+    render: function () {
+        var {isLoading, temp, location} = this.state;
+
+        function renderMessage () {
+
+            //debugger;
+
+            if (isLoading) {
+                return <h3>Fetching weather....</h3>;
+            } else if (temp && location) {
+                return <WeatherMessage temp={temp} location={location}/>;
+
+            }
+        }
+
+        return (
+            <div>
+                <h3>Weather Component</h3>
+                <WeatherForm onSearch={this.handleSearch}/>
+                {/* <WeatherMessage temp={temp} location={location}/>*/}
+                {/*.......This comment is for WeatherForm and WeatherMessage component........
+                 image ta dekhle dekhte pabo je Weather ta hocce kalo border wala wrapper..
+                 er moddhe 1ta input field thakbe and getWeather e click korle niche 1ta message dekhabe
+                 je weather koto.. sejonno ei component e nested korlam ei 2take....*/}
+
+                {renderMessage ()}
+                {/*.........This comment is about why we commented out the weatherMessage Component and
+                 ............  why we add renderMessage().............................
+                 amke dorkar 1ta function er moddhe 2ta condition check kora..
+                 jodi isLoading true thake mane loading hobe ekhn, tokhn loading message ta show korano..
+                 else jodi loading false hoy mane loading ses, tokhn temp ar location ke WeatherMessage component
+                 er maddhome render kore show korano... ejonno 1ta function er moddhe nie function take call korllamm..
+                 as eta jsx expression tai {} er moddhe funtion name take likhlam...evabe dorkar hole
+                 function er moddheo component nie kaj korte parbo....
+
+                 */}
+
+            </div>
+
+
+        );
+    }
+} );
+
+module.exports = Weather;
+
+6.code for WeatherForm.jsx :
+var React = require('react');
+
+var WeatherForm = React.createClass ( {
+    onFormSubmit : function ( e ) {
+        e.preventDefault();
+
+        var location = this.refs.location.value;
+        if(location.length> 0 )
+        {
+            this.refs.location.value = '';
+            this.props.onSearch(location);
+        }
+    },
+    render: function () {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" ref="location"/>
+                    <br/><br/>
+                    <button>Get Weather</button>
+                </form>
+
+            </div>
+        );
+    }
+} );
+
+module.exports = WeatherForm;
+
+7.code for weatherMessage.jsx :
+var React = require('react');
+
+/*var WeatherMessage = React.createClass ( {
+    render: function () {
+        var {temp,location} = this.props;
+        return (
+            <div>
+                <h3>It is {temp} degree celsius  in {location}.</h3>
+            </div>
+        );
+    }
+} );*/
+
+var WeatherMessage = (props) => {
+    /*
+    * ekhane normal code e props er use cilo..
+    * tai parameter e props dewa lage..
+    * as parameter e already props dewa
+    * tai ar niche var {temp, location} = this.props na likhe
+    * var {temp, location} = props; just eta likhlam...
+    * */
+    var {temp, location} = props;
+    return (
+        <div>
+            <h3>It is {temp} degree celsius  in {location}.</h3>
+        </div>
+    );
+};
+
+
+//aro shorter lekhar system
+
+var WeatherMessage = ({temp, location}) => {
+    /*
+    * es6 destructuring format use korlam..
+    * */
+    /* var {temp, location} = props;*/
+    //tahole ar props use kora lagtecena....
+    return (
+        <div>
+            <h3>It is {temp} degree celsius  in {location}.</h3>
+        </div>
+    );
+};
+
+module.exports = WeatherMessage;
+

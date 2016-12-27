@@ -1,0 +1,65 @@
+ei part e just Weather component er vitor je 2ta nested component thakbe ogulake create korbo..
+1.code for WeatherForm.jsx :
+var React = require('react');
+
+var WeatherForm = React.createClass ( {
+    render: function () {
+        return (
+            <div>
+                <input type="text" /><br/><br/>
+                <button>Get Weather</button>
+            </div>
+        );
+    }
+} );
+
+module.exports = WeatherForm;
+
+2.code for WeatherMessage.jsx :
+var React = require('react');
+
+var WeatherMessage = React.createClass ( {
+    render: function () {
+        return (
+            <div>
+                <h3>It is 40 in Dhaka</h3>
+            </div>
+        );
+    }
+} );
+module.exports = WeatherMessage;
+
+3.code for Weather.jsx :
+var React = require ( 'react' );
+var WeatherForm = require ( 'WeatherForm' );
+var WeatherMessage = require ( 'WeatherMessage' );
+
+var Weather = React.createClass ( {
+    render: function () {
+        return (
+            <div>
+                <h3>Weather Component</h3>
+                <WeatherForm />
+                <WeatherMessage/>
+                {/*.......This comment is for WeatherForm and WeatherMessage component........
+                 image ta dekhle dekhte pabo je Weather ta hocce kalo border wala wrapper..
+                 er moddhe 1ta input field thakbe and getWeather e click korle niche 1ta message dekhabe
+                 je weather koto.. sejonno ei component e nested korlam ei 2take....*/}
+            </div>
+
+        );
+    }
+} );
+
+module.exports = Weather;
+
+4.code for aliases :
+alias: {
+            Main: 'app/components/Main.jsx',
+            Nav: 'app/components/Nav.jsx',
+            Weather: 'app/components/Weather.jsx',
+            WeatherForm : 'app/components/WeatherForm.jsx',
+            WeatherMessage : 'app/components/WeatherMessage.jsx',
+            About: 'app/components/About.jsx',
+            Examples: 'app/components/Examples.jsx'
+        },

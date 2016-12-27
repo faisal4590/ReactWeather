@@ -1,0 +1,6 @@
+1. routing korar jonno react router install kora lagbe..
+npm install react-router@VERSION_NUMBER --save
+(--save use korle package.json file tao update hobe..
+-g mane globally install hobe...)
+
+2.
