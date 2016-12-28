@@ -14,6 +14,12 @@ var About = require ( 'About' );
 //examples component ke nici
 var Examples = require('Examples');
 
+//loading foundation
+
+require('style!css!foundation-sites/dist/foundation.min.css');
+$(document).foundation();
+
+
 ReactDOM.render (
     <Router history={hashHistory}>
         {/* ........This comment is for hasHistory.........
