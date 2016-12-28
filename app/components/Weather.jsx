@@ -2,7 +2,7 @@ var React = require ( 'react' );
 var WeatherForm = require ( 'WeatherForm' );
 var WeatherMessage = require ( 'WeatherMessage' );
 var openWeatherMap = require ( '../api/openWeatherMap' );
-
+var ErrorModal = require ( 'ErrorModal' );
 
 var Weather = React.createClass ( {
     getInitialState: function () {
@@ -43,14 +43,17 @@ var Weather = React.createClass ( {
          * */
 
 
-        this.setState ( {isLoading: true} );
+        this.setState ( {
+            isLoading: true,
+            errorMessage: undefined
+        } );
         //jokhn search korbe tokhn loading hobe...tai ekhane
         //true kore dilam...
 
         openWeatherMap.getTemp ( location ).then ( function ( temp ) {
             that.setState ( {
-               /* //kono function er moddhe this use korte partam na..
-                //tai 1ta variable e nie then use korlam...*/
+                /* //kono function er moddhe this use korte partam na..
+                 //tai 1ta variable e nie then use korlam...*/
                 location: location,
                 temp: temp,
                 isLoading: false
@@ -62,22 +65,25 @@ var Weather = React.createClass ( {
                  dicce tai ekhane isLoding false die dilam...
                  */
 
-            } )
-        }, function ( errorMessage ) {
+            } );
+        }, function ( e ) {
 
-            that.setState ( {isLoading: false} );
+            that.setState ( {
+                isLoading: false,
+                errorMessage: e.message
+            } );
             /*..........This comment is for why we use isLoading : false here ..............
              ekhaneo isLoading false dilam karon similary kono error paile setake
              alert box e display korar poro fetching data uthei thake caz isLoading false hocce na
              */
 
 
-            alert ( errorMessage );
+            //alert ( errorMessage );
         } );
 
     },
     render: function () {
-        var {isLoading, temp, location} = this.state;
+        var {isLoading, temp, location, errorMessage} = this.state;
 
         function renderMessage () {
 
@@ -88,6 +94,14 @@ var Weather = React.createClass ( {
             } else if (temp && location) {
                 return <WeatherMessage temp={temp} location={location}/>;
 
+            }
+        }
+
+        function renderError () {
+            if (typeof errorMessage === 'string') {
+                return (
+                    <ErrorModal message={errorMessage}/>
+                )
             }
         }
 
@@ -113,6 +127,7 @@ var Weather = React.createClass ( {
 
                  */}
 
+                {renderError ()}
             </div>
 
 
