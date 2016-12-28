@@ -1,7 +1,11 @@
 
 node_modules/
 <<<<<<< HEAD
+<<<<<<< HEAD
 .idea/
+=======
+.idea/
+>>>>>>> b1530fe6b403056cdfa32c40e9e8f68a6f61b775
 =======
 .idea/
 >>>>>>> b1530fe6b403056cdfa32c40e9e8f68a6f61b775
