@@ -1,5 +1,8 @@
 var React = require ( 'react' );
 
+var {Link} = require ( 'react-router' );
+
+
 /*var Examples = React.createClass ( {
  render: function () {
  return (
@@ -10,11 +13,27 @@ var React = require ( 'react' );
  }
  } );*/
 
-var Examples = ( ) => {
+var Examples = () => {
     return (
         <div>
-            <h2>Examples</h2>
-            <p>Welcome to examples page</p>
+            <h1 className="text-center">Examples</h1>
+            <p>Here are are a few example locations to try out : </p>
+            <ol>
+                <li>
+                    <Link to="/?location=Dhaka">Dhaka</Link>
+                </li>
+                <li>
+                    <Link to="/?location=Chittagong">Chittagong</Link>
+                </li>
+            </ol>
+
+            {/*
+             egula hocce 2ta example location jegulate click korle temp show korbe ei 2ta area er..
+             Link e click korle url eo Dhaka location i dekhabe .. sejonno url e
+             specify kore dilam.. and result dekhabe home page e..
+             tai / er por location likhlam...
+             */}
+
         </div>
     )
 };
