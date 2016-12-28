@@ -11,8 +11,25 @@ var React = require ( 'react' );
 var About = ( props ) => {
     return (
         <div>
-            <h3>About Component</h3>
-            <p>Welcome to about page</p>
+            <h1 className="text-center">About the App</h1>
+            <p>
+                This is a simple weather application
+                in which we can get the current temperature
+                of any city or area by searching their name.
+                This is version 1.0.0 . Further update may come in later.
+            </p>
+            <p>
+                Here you can see other projects of mine :
+            </p>
+            <ul>
+                <li>
+                    <a href="#" target="_blank">
+                        Online Book Store
+                    </a>
+                </li>
+            </ul>
+            
+
         </div>
 
     );
