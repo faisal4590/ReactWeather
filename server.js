@@ -11,11 +11,11 @@ app.use ( function ( request, response, next ) {
     *tai check korbo jodi http thake tahole next() e agabo..
     * ar jodi https thake tahole take redirect kore http kore dibo...
     * */
-    if (request.headers[ 'x-forwarded-proto' ] === 'http') {
-        next ();
+    if (request.headers[ 'x-forwarded-proto' ] === 'https') {
+        response.redirect('http://' + request.hostname + request.url);
     }
     else {
-        response.redirect('http://' + request.hostname + request.url);
+        next();
     }
 } );
 
