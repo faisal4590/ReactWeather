@@ -38,7 +38,7 @@ var WeatherMessage = ({temp, location}) => {
     //tahole ar props use kora lagtecena....
     return (
         <div>
-            <h3>It is {temp} degree celsius  in {location}.</h3>
+            <h3 className="text-center">It is {temp} degree celsius  in {location}.</h3>
         </div>
     );
 };

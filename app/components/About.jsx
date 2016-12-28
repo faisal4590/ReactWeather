@@ -28,7 +28,7 @@ var About = ( props ) => {
                     </a>
                 </li>
             </ul>
-            
+
 
         </div>
 
