@@ -45,7 +45,9 @@ var Weather = React.createClass ( {
 
         this.setState ( {
             isLoading: true,
-            errorMessage: undefined
+            errorMessage: undefined,
+            location: undefined,
+            temp: undefined
         } );
         //jokhn search korbe tokhn loading hobe...tai ekhane
         //true kore dilam...
@@ -82,6 +84,38 @@ var Weather = React.createClass ( {
         } );
 
     },
+
+    componentDidMount: function () {
+        var location = this.props.location.query.location;
+        /*
+         * example page e query string e location=dhaka select kore dicilam..
+         * now sei query string take catch korte hbe.. component er onek props
+         * er moddhe query o 1ta prop.. eta use kore url er location take location var e nilam..
+         *
+         * */
+
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '#/';
+            /*
+             * example er weather search kora hye gele
+             * url theke location take remove kore dilam..
+             * */
+        }
+
+
+    },
+    componentWillReceiveProps: function (newProps) {
+
+        var location = newProps.location.query.location;
+
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '#/';
+
+        }
+    },
+
     render: function () {
         var {isLoading, temp, location, errorMessage} = this.state;
 
