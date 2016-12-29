@@ -1,0 +1,17 @@
+$space-large: 2.5rem;
+$slateblue: slateblue;
+
+.page-title {
+  margin-top: $space-large;
+  margin-bottom: $space-large;
+  font-family: Algerian, serif;
+  font-weight: bold;
+  //color: #323232;
+  color: $slateblue;
+}
+
+.logo-style {
+  font-size: 23px;
+  font-family: "Berlin Sans FB", serif;
+  color: #FF3C3F;
+}

@@ -20,7 +20,7 @@ require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
 //css ke nici
-require('style!css!applicationStyles');
+require('style!css!sass!applicationStyles');
 
 
 ReactDOM.render (
