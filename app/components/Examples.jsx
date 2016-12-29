@@ -25,6 +25,15 @@ var Examples = () => {
                 <li>
                     <Link to="/?location=Chittagong">Chittagong</Link>
                 </li>
+                <li>
+                    <Link to="/?location=Military institute of science and technology">Military institute of science and technology</Link>
+                </li>
+                <li>
+                    <Link to="/?location=Alaska">Alaska</Link>
+                </li>
+                <li>
+                    <Link to="/?location=Antarktica">Antarktica</Link>
+                </li>
             </ol>
 
             {/*
