@@ -11,7 +11,7 @@ var React = require ( 'react' );
 var About = ( props ) => {
     return (
         <div>
-            <h1 className="text-center">About the App</h1>
+            <h1 className="text-center page-title">About the App</h1>
             <p>
                 This is a simple weather application
                 in which we can get the current temperature

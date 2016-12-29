@@ -50,21 +50,32 @@ var Nav = React.createClass ( {
             <div className="top-bar">
                 <div className="top-bar-left">
                     <ul className="menu">
-                        <li className="menu-text">
+                        <li className="menu-text logo-style">
                             World Weather App
                         </li>
 
                         <li>
-                            <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Get
+                            <IndexLink to="/" activeClassName="active"
+                                       activeStyle={{
+                                           fontWeight: 'bold',
+                                           borderBottom: '3px solid',
+                                           fontSize: '1.5rem'
+                                       }}>Get
                                 Weather </IndexLink>
                         </li>
                         <li>
-                            <Link to="/About" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>About </Link>
+                            <Link to="/About" activeClassName="active" activeStyle={{
+                                fontWeight: 'bold', borderBottom: '3px solid'
+                                , fontSize: '1.5rem'
+                            }}>About </Link>
 
                         </li>
                         <li>
                             <Link to="/Examples" activeClassName="active"
-                                  activeStyle={{fontWeight: 'bold'}}>Examples </Link>
+                                  activeStyle={{
+                                      fontWeight: 'bold',
+                                      borderBottom: '3px solid', fontSize: '1.5rem'
+                                  }}>Examples </Link>
 
                         </li>
                     </ul>

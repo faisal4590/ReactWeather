@@ -1,0 +1,33 @@
+just jekhane style korbo sekhaner className er moddhe css er name ta die dibo..
+example :
+css :
+.page-title{
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    font-family: Algerian, serif;
+    font-weight: bold;
+    color: #323232;
+}
+
+jsx file :
+<div>
+<h1 className="text-center page-title">Get Weather</h1>
+</div>
+
+app.jsx e style er sathe rel die dci:
+require('style!css!applicationStyles');
+
+aliases :
+alias: {
+            Main: 'app/components/Main.jsx',
+            Nav: 'app/components/Nav.jsx',
+            Weather: 'app/components/Weather.jsx',
+            WeatherForm : 'app/components/WeatherForm.jsx',
+            WeatherMessage : 'app/components/WeatherMessage.jsx',
+            About: 'app/components/About.jsx',
+            Examples: 'app/components/Examples.jsx',
+            openWeatherMap : 'app/api/components/openWeatherMap.jsx',
+            ErrorModal : 'app/components/ErrorModal.jsx',
+            applicationStyles : 'app/styles/app.css'
+
+},

@@ -19,6 +19,9 @@ var Examples = require('Examples');
 require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
+//css ke nici
+require('style!css!applicationStyles');
+
 
 ReactDOM.render (
     <Router history={hashHistory}>
