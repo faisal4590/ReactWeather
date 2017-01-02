@@ -23,7 +23,7 @@ var About = ( props ) => {
             </p>
             <ul>
                 <li>
-                    <a href="http://books.matrixmp3bd.com/" target="_blank">
+                    <a href="http://books.matrixmp3bd.com/book_store/register.php" target="_blank">
                         Online Book Store
                     </a>
                 </li>
